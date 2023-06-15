@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<Schema name="whadw1">
+<!--
+  == This software is subject to the terms of the Eclipse Public License v1.0
+  == Agreement, available at the following URL:
+  == http://www.eclipse.org/legal/epl-v10.html.
+  == You must accept the terms of that agreement to use this software.
+  ==
+  == Copyright (C) 2000-2005 Julian Hyde
+  == Copyright (C) 2005-2011 Pentaho and others
+  == All Rights Reserved.
+  -->
+
+<!-- Shared dimensions -->
+
+  
+
+<!-- Sales -->
+<Cube name="Penjualan" defaultMeasure="line_total">
+  <!-- Use annotations to provide translations of this cube's caption and
+       description into German and French. Use of annotations in this manner is
+       experimental and unsupported; just for testing right now. -->
+  
+  <Table name="fact_sales"/>
+
+    
+  <Dimension name="Product" foreignKey ="product_id">
+      <Hierarchy hasAll="true" allMemberName="All Products" primaryKey ="product_id">
+      <Table name="product"/>
+      <Level name="Product" column="product_name"/>
+      </Hierarchy>
+      
+  </Dimension>
+
+ 
+  <Dimension name="Time" foreignKey="time_id">
+    <Hierarchy hasAll="true" allMemberName="All Times" primaryKey="time_id">
+      <Table name="time" />
+      <Level name="Year" column="year" type="Numeric" uniqueMembers="true"
+          levelType="TimeYears"/>
+      <Level name="Month" column="month" uniqueMembers="false" type="Numeric"
+          levelType="TimeMonths"/>
+      <Level name="Day" column="day" uniqueMembers="false" type="Numeric"
+          levelType="TimeDays"/>
+    </Hierarchy>
+   
+  </Dimension>
+
+  <Dimension name="Contact" foreignKey = "contact_id">
+    <Hierarchy hasAll="true" allMemberName="All Contacts" primaryKey ="contact_id">
+      <Table name="contact" />
+      <Level name="Contact" column="name"/>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="Territory" foreignKey="territory_id">
+    
+    <Hierarchy  hasAll  ="true" allMemberName="All Territory" primaryKey  = "territory_id">
+        <Table name="territory"/>
+        <Level name="Territory" column="territory_name"/>
+    </Hierarchy>
+  </Dimension>
+    
+  <Dimension name="Ship Method" foreignKey="ship_method_id">
+    
+    <Hierarchy  hasAll  ="true" allMemberName="All Ship Method" primaryKey  = "ship_method_id">
+        <Table name="ship_method"/>
+        <Level name="Ship Method" column="ship_method_name"/>
+    </Hierarchy>
+  </Dimension>
+
+  <Measure name="unit_price" column="unit_price" aggregator="avg"
+      formatString="Standard"/>
+  <Measure name="line_total" column="line_total" aggregator="sum"
+      formatString="Standard"/>
+  <Measure name="sales count" column="product_id" aggregator="count"
+      formatString="#,###"/>
+  <Measure name="contact count" column="contact_id" aggregator="distinct-count"
+      formatString="#,###"/>
+  
+</Cube>
+
+
+
+</Schema>

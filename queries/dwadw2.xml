@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<Schema name="whadw2">
+<!--
+  == This software is subject to the terms of the Eclipse Public License v1.0
+  == Agreement, available at the following URL:
+  == http://www.eclipse.org/legal/epl-v10.html.
+  == You must accept the terms of that agreement to use this software.
+  ==
+  == Copyright (C) 2000-2005 Julian Hyde
+  == Copyright (C) 2005-2011 Pentaho and others
+  == All Rights Reserved.
+  -->
+
+<!-- Shared dimensions -->
+
+  
+
+<!-- Sales -->
+<Cube name="Stok" defaultMeasure="stocked_quantity">
+  <!-- Use annotations to provide translations of this cube's caption and
+       description into German and French. Use of annotations in this manner is
+       experimental and unsupported; just for testing right now. -->
+  
+  <Table name="fact_production"/>
+
+    
+  <Dimension name="Product" foreignKey ="product_id">
+      <Hierarchy hasAll="true" allMemberName="All Products" primaryKey ="product_id">
+      <Table name="product"/>
+      <Level name="Product" column="product_name"/>
+      </Hierarchy>
+      
+  </Dimension>
+
+ 
+  <Dimension name="Time" foreignKey="time_id">
+    <Hierarchy hasAll="true" allMemberName="All Times" primaryKey="time_id">
+      <Table name="time" />
+      <Level name="Year" column="year" type="Numeric" uniqueMembers="true"
+          levelType="TimeYears"/>
+      <Level name="Month" column="month" uniqueMembers="false" type="Numeric"
+          levelType="TimeMonths"/>
+      <Level name="Day" column="day" uniqueMembers="false" type="Numeric"
+          levelType="TimeDays"/>
+    </Hierarchy>
+   
+  </Dimension>
+
+  <Dimension name="Scrap Reason" foreignKey = "scrap_reason_id">
+    <Hierarchy hasAll="true" allMemberName="All Scrap Reason" primaryKey ="scrap_reason_id">
+      <Table name="scrap_reason" />
+      <Level name="Scrap Reason" column="name"/>
+    </Hierarchy>
+  </Dimension>
+
+  <Measure name="stocked_quantity" column="stocked_quantity" aggregator="sum"
+      formatString="Standard"/>
+  <Measure name="keterlambatan" column="keterlambatan" aggregator="sum"
+      formatString="Standard"/>
+  <Measure name="scrapped_quantity" column="scrapped_quantity" aggregator="sum"
+      formatString="Standard"/>
+
+  
+</Cube>
+
+
+
+</Schema>
