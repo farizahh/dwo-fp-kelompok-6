@@ -1,4 +1,4 @@
-# dwo-whsakila
+# final-project-dwo-adventureworks
 Project Tugas Besar UAS DWO Kelompok 5
 Anggota Kelompok : 
 - Salwa Amalia Balqis (21082010184)
