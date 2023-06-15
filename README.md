@@ -1,4 +1,4 @@
-# final-project-dwo-adventureworks
+# Final Project Mata Kuliah DWO - Adventure Works
 Project Tugas Besar UAS DWO Kelompok 5
 Anggota Kelompok : 
 - Salwa Amalia Balqis (21082010184)
